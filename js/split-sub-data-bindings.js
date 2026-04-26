@@ -2,8 +2,13 @@
   const DATA_URL = 'https://script.google.com/macros/s/AKfycby-L3TTZqqw4WkB_u2JoK4hIJbgkXkXZ280SFEFHdJWkhzB0dPH2vCw__891aJg2ybO/exec';
 
   function normalizeText_(value) {
-    return String(value || '').replace(/\s+/g, ' ').trim();
-  }
+  return String(value || '')
+    .replace(/\*/g, '')
+    .replace(/:\s*$/, '')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+  
 
   function getLabelText_(line) {
     const label = line ? line.querySelector('.form-label') : null;
