@@ -1543,7 +1543,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   function recomputeAll() {
-    const { counts, compensationByName, totalSplit, uniqueCount } = collectData();
+    const { counts, compensationByName } = collectData();
 
     const rows = Array.from(counts.entries())
       .map(([name, count]) => ({
@@ -1565,12 +1565,8 @@ document.addEventListener('DOMContentLoaded', function () {
       setFieldValue(pair.compensationField, row ? formatMoney(row.compensation) : '');
     });
 
-    setFieldValue(totalSplittersField, uniqueCount);
-
-    const averagePerEmployee = uniqueCount > 0 ? totalSplit / uniqueCount : 0;
-    if (amountPerEmployeeField) {
-      setFieldValue(amountPerEmployeeField, uniqueCount > 0 ? formatMoney(averagePerEmployee) : '');
-    }
+    // Leave Number of Staff Splitting and Amount Per Employee to Jotform conditional logic.
+    // This avoids conflicts on the elementary workflow where those fields are calculated in-builder.
   }
 
   function isWatchedField(target) {
