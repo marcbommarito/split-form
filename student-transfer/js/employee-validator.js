@@ -136,12 +136,9 @@
   }
 
   function loadEmployeeData(callback) {
-    if (window.SPLIT_SUB_DATA && Array.isArray(window.SPLIT_SUB_DATA.teachers)) {
-      employeeMap = parseEmployeeData();
-      dataLoaded = true;
-      callback();
-      return;
-    }
+    dataLoaded = false;
+    employeeMap = {};
+    window.SPLIT_SUB_DATA = undefined;
 
     const script = document.createElement('script');
     const sep = DATA_URL.indexOf('?') >= 0 ? '&' : '?';
@@ -188,9 +185,7 @@
       if (!validate(true)) {
         event.preventDefault();
         event.stopPropagation();
-        if (empInput && empInput.value) {
-          (getFirstInput() || empInput).focus();
-        }
+        (getFirstInput() || empInput).focus();
       }
     }, true);
   }
