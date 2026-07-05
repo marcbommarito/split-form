@@ -1,5 +1,5 @@
 (function () {
-  const DATA_URL = 'https://script.google.com/macros/s/AKfycby-L3TTZqqw4WkB_u2JoK4hIJbgkXkXZ280SFEFHdJWkhzB0dPH2vCw__891aJg2ybO/exec';
+  const DATA_URL = 'https://script.google.com/macros/s/AKfycby-L3TTZqqw4WkB_u2JoK4hIJbgkXkXZ280SFEFHdJWkhzB0dPH2vCw__891aJg2ybO/exec?mode=transfer';
   const FORM_ID = '261096398003054';
   const EMPLOYEE_INPUT_ID = 'input_106';
   const FIRST_INPUT_ID = 'first_62';
