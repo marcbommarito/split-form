@@ -23,6 +23,20 @@
   <script src="https://cdn.jotfor.ms/s/umd/78a8bb66be2/for-aria-notify-polyfill.js"></script>
   <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/js/vendor/smoothscroll.min.js"></script>
   <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/js/errorNavigation.js"></script>
+  <script>
+    JotForm.newDefaultTheme=true;
+    JotForm.extendsNewTheme=false;
+    JotForm.singleProduct=false;
+    JotForm.newPaymentUIForNewCreatedForms=false;
+    JotForm.newPaymentUI=true;
+    JotForm.originalLanguage='en';
+    JotForm.activeRedirect='thanktext';
+    JotForm.uploadServerURL='https://upload.jotform.com/upload';
+    JotForm.clearFieldOnHide='disable';
+    JotForm.submitError='jumpToFirstError';
+    JotForm.isFullSource=true;
+    JotForm.init(function(){});
+  </script>
 
   <style>
     html,body{margin:0;min-height:100%;background:#fff5f5;font-family:"Philosopher",sans-serif;color:#333}
@@ -61,8 +75,8 @@
       <input type="hidden" id="JWTContainer" value="">
       <input type="hidden" id="cardinalOrderNumber" value="">
       <input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1787762406595">
-      <input type="hidden" id="submitSource" name="submitSource" value="hosted-github">
-      <input type="hidden" id="submitDate" name="submitDate" value="">
+      <input type="hidden" id="submitSource" name="submitSource" value="unknown">
+      <input type="hidden" id="submitDate" name="submitDate" value="undefined">
       <input type="hidden" id="buildDate" name="buildDate" value="1787762406595">
       <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
       <input type="hidden" name="eventObserver" value="1">
@@ -128,15 +142,7 @@
     (function(){
       var dateEl=document.getElementById('attendance_date');
       var timeEl=document.getElementById('attendance_time');
-      var form=document.getElementById('261966694349072');
-
       function pad(n){return String(n).padStart(2,'0');}
-      function setNow(){
-        var d=new Date();
-        dateEl.value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
-        timeEl.value=pad(d.getHours())+':'+pad(d.getMinutes());
-        syncFields();
-      }
       function syncFields(){
         if(dateEl.value){
           var dp=dateEl.value.split('-');
@@ -146,7 +152,7 @@
         }
         if(timeEl.value){
           var tp=timeEl.value.split(':');
-          var h24=parseInt(tp[0],10), min=tp[1]||'00';
+          var h24=parseInt(tp[0],10),min=tp[1]||'00';
           var ampm=h24>=12?'PM':'AM';
           var h12=h24%12||12;
           document.getElementById('input_5_timeInput').value=pad(h12)+':'+min;
@@ -155,18 +161,24 @@
           document.getElementById('input_5_ampm').value=ampm;
         }
       }
+      function setNow(){
+        var d=new Date();
+        dateEl.value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+        timeEl.value=pad(d.getHours())+':'+pad(d.getMinutes());
+        syncFields();
+      }
       dateEl.addEventListener('change',syncFields);
       timeEl.addEventListener('change',syncFields);
-      form.addEventListener('submit',function(){syncFields();document.getElementById('submitDate').value=new Date().toISOString();});
+      document.getElementById('261966694349072').addEventListener('submit',syncFields);
       setNow();
     })();
   </script>
 
   <script>
-    document.addEventListener('JotformReady',function(){
-      setTimeout(function(){
+    (function(){
+      function renderGeoWidget(){
         var frame=document.getElementById('customFieldFrame_11');
-        if(!frame)return;
+        if(!frame||frame.getAttribute('data-widget-src'))return;
         frame.onload=function(){
           if(typeof widgetFrameLoaded!=='undefined')widgetFrameLoaded(11,{formID:261966694349072},undefined,{});
         };
@@ -174,8 +186,10 @@
         frame.src=next;
         frame.setAttribute('data-widget-src',next);
         frame.classList.add('custom-field-frame-rendered');
-      },0);
-    });
+      }
+      if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',renderGeoWidget);else renderGeoWidget();
+      document.addEventListener('JotformReady',renderGeoWidget);
+    })();
   </script>
 
   <script src="./contracted-support-selector.js?v=2"></script>
