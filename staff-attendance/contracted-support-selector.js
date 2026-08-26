@@ -1,6 +1,5 @@
 (function () {
-  // Replace this after the Apps Script project is deployed as a Web App.
-  const DATA_URL = 'PASTE_APPS_SCRIPT_WEB_APP_URL_HERE';
+  const DATA_URL = 'https://script.google.com/macros/s/AKfycbz5uehocca1-EULXm2iD-w6pItAdlQuaPTYWUEiKphMusGeI3h3movpjET1v1ieTUM82Q/exec';
   const QUESTION_LABEL = 'Enter name or ID number';
   const DATALIST_ID = 'contracted-support-employee-options';
   const ERROR_CLASS = 'contracted-support-selection-error';
@@ -160,11 +159,6 @@
   }
 
   function loadData() {
-    if (!DATA_URL || DATA_URL.indexOf('PASTE_') === 0) {
-      console.error('Contracted support selector: Apps Script Web App URL has not been configured.');
-      return;
-    }
-
     const script = document.createElement('script');
     const separator = DATA_URL.indexOf('?') >= 0 ? '&' : '?';
     script.src = DATA_URL + separator + 'ts=' + Date.now();
