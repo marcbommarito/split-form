@@ -1,7 +1,6 @@
 (function () {
   const DATA_URL = 'https://script.google.com/macros/s/AKfycbz5uehocca1-EULXm2iD-w6pItAdlQuaPTYWUEiKphMusGeI3h3movpjET1v1ieTUM82Q/exec';
   const QUESTION_LABEL = 'Enter name or ID number';
-  const DATALIST_ID = 'contracted-support-employee-options';
   const ERROR_CLASS = 'contracted-support-selection-error';
 
   let employees = [];
@@ -35,18 +34,6 @@
     );
   }
 
-  function ensureDatalist() {
-    let datalist = document.getElementById(DATALIST_ID);
-
-    if (!datalist) {
-      datalist = document.createElement('datalist');
-      datalist.id = DATALIST_ID;
-      document.body.appendChild(datalist);
-    }
-
-    return datalist;
-  }
-
   function setError(message) {
     const line = findQuestionLine();
     if (!line) return;
@@ -61,7 +48,7 @@
     if (!error) {
       error = document.createElement('div');
       error.className = ERROR_CLASS;
-      error.style.color = '#d9534f';
+      error.style.color = '#c62828';
       error.style.marginTop = '6px';
       error.style.fontSize = '0.95em';
       error.setAttribute('aria-live', 'polite');
@@ -71,37 +58,19 @@
     error.textContent = message;
   }
 
-  function populateOptions() {
+  function applyData() {
     const payload = window.CONTRACTED_SUPPORT_DATA || {};
     employees = Array.isArray(payload.employees) ? payload.employees : [];
-    validLabels = new Set();
-
-    const datalist = ensureDatalist();
-    datalist.innerHTML = '';
-
-    employees.forEach(function (employee) {
-      if (!employee || !employee.label) return;
-
-      const label = normalizeText(employee.label);
-      if (!label) return;
-
-      validLabels.add(label);
-
-      const option = document.createElement('option');
-      option.value = label;
-
-      const details = [employee.agency, employee.position]
-        .map(normalizeText)
+    validLabels = new Set(
+      employees
+        .map(function (employee) {
+          return employee && employee.label ? normalizeText(employee.label) : '';
+        })
         .filter(Boolean)
-        .join(' • ');
-
-      if (details) option.label = details;
-      datalist.appendChild(option);
-    });
+    );
 
     const input = findInput();
     if (input) {
-      input.setAttribute('list', DATALIST_ID);
       input.setAttribute('autocomplete', 'off');
       input.setAttribute('placeholder', 'Start typing a name or ID');
     }
@@ -158,15 +127,22 @@
     }, true);
   }
 
+  function initialize() {
+    applyData();
+    attachValidation();
+  }
+
   function loadData() {
+    if (window.CONTRACTED_SUPPORT_DATA) {
+      initialize();
+      return;
+    }
+
     const script = document.createElement('script');
     const separator = DATA_URL.indexOf('?') >= 0 ? '&' : '?';
     script.src = DATA_URL + separator + 'ts=' + Date.now();
     script.async = true;
-    script.onload = function () {
-      populateOptions();
-      attachValidation();
-    };
+    script.onload = initialize;
     script.onerror = function () {
       dataLoaded = false;
       console.error('Could not load contracted support employee data.');
