@@ -1,1 +1,183 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Staff Attendance Form</title></head><body><p>Staff Attendance Form is being configured.</p></body></html>
+<!DOCTYPE html>
+<html lang="en" class="supernova">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, user-scalable=1">
+  <title>Staff Attendance Form</title>
+  <link rel="shortcut icon" href="https://cdn.jotfor.ms/assets/img/favicons/favicon-2021-light%402x.png">
+  <link rel="stylesheet" href="https://cdn.jotfor.ms/stylebuilder/static/form-common.css?v=6d7412e">
+  <link id="custom-font" rel="stylesheet" href="https://cdn.jotfor.ms/fonts/?family=Philosopher">
+  <link rel="stylesheet" href="https://cdn.jotfor.ms/themes/CSS/5e6b428acc8c4e222d1beb91.css?v=4.1.77575&themeRevisionID=65660e4b326633110492e01a">
+
+  <script>window.enableEventObserver=true;</script>
+  <script>window.enableDateFieldSelectInputs=false;</script>
+  <script>window.CDN='https://cdn.jotfor.ms/';</script>
+  <script>window.umdRootPath='https://cdn.jotfor.ms/s/umd/78a8bb66be2/';</script>
+  <script>window.staticRootPath='https://cdn.jotfor.ms/s/static/78a8bb66be2/';</script>
+  <script>window['__jfrouter']=[{"ACTIVE_APP":"for-form-render","REVISION_HASH":"78a8bb66be2"}];</script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/secure-message-bus.js"></script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/static/prototype.forms.js"></script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/static/jotform.forms.js"></script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/js/vendor/maskedinput_5.0.9.min.js"></script>
+  <script src="https://cdn.jotfor.ms/s/umd/78a8bb66be2/for-widgets-server.js"></script>
+  <script src="https://cdn.jotfor.ms/s/umd/78a8bb66be2/for-aria-notify-polyfill.js"></script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/js/vendor/smoothscroll.min.js"></script>
+  <script src="https://cdn.jotfor.ms/s/static/78a8bb66be2/js/errorNavigation.js"></script>
+
+  <style>
+    html,body{margin:0;min-height:100%;background:#fff5f5;font-family:"Philosopher",sans-serif;color:#333}
+    .form-all{max-width:752px;margin:0 auto;background:#fff;border-radius:6px}
+    .form-header-group{background:#ffe5e5;text-align:center;padding:34px 45px;border-radius:6px 6px 0 0}
+    .form-header{margin:0 0 8px;font-size:32px}.form-subHeader{font-size:16px}
+    ul.form-section{padding:0 38px 28px;list-style:none}.form-line{margin:12px 0;padding:12px 0}
+    .form-label{display:block;margin-bottom:8px;font-weight:700}.form-required{color:#c62828}
+    .form-textbox,.form-dropdown{box-sizing:border-box;min-height:42px;border:1px solid #b71c1c;border-radius:6px;background:#fff;color:#333;padding:8px 10px;font:inherit}
+    .form-textbox:focus,.form-dropdown:focus{outline:none;box-shadow:0 0 0 3px rgba(183,28,28,.2)}
+    #input_8{width:100%;max-width:520px}.attendance-row{display:flex;gap:14px;flex-wrap:wrap}.attendance-field{flex:1;min-width:180px}
+    .form-radio-item{display:inline-flex;align-items:center;margin-right:28px;gap:7px}.form-radio{width:20px;height:20px}
+    .form-buttons-wrapper{text-align:center;margin-top:18px}.form-submit-button{min-width:180px;min-height:44px;border:1px solid #b30000;border-radius:6px;background:#ff0000;color:#fff;font:700 16px inherit;cursor:pointer}
+    .form-submit-button:hover{background:#cc0000}.form-sub-label{display:block;margin-top:4px;font-size:13px}
+    .form-cover-wrapper{text-align:center;margin:0 auto 24px;max-width:752px;background:#fff}.form-page-cover-image{max-width:290px;height:auto;margin-top:22px}
+    .contracted-support-menu{position:absolute;z-index:99999;display:none;box-sizing:border-box;max-height:300px;overflow-y:auto;background:#fff;border:1px solid #b71c1c;border-radius:6px;box-shadow:0 6px 18px rgba(0,0,0,.16)}
+    .contracted-support-option{padding:9px 12px;cursor:pointer;line-height:1.25}.contracted-support-option:hover,.contracted-support-option.is-active{background:#ffe5e5}.contracted-support-option-main{font-weight:700}.contracted-support-option-meta{margin-top:2px;font-size:12px;opacity:.75}
+    .contracted-support-status{margin-top:6px;font-size:13px}.contracted-support-status.is-error{color:#c62828;font-weight:700}
+    .sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+    @media(max-width:767px){.form-all{border-radius:0}ul.form-section{padding:0 20px 24px}.form-header-group{padding:28px 20px}.form-header{font-size:27px}}
+  </style>
+</head>
+<body>
+  <div id="formCoverLogo" class="form-cover-wrapper form-has-cover form-page-cover-image-align-center">
+    <img src="https://www.jotform.com/uploads/MarcBommarito/form_files/Menifee%20Logo%207_20_2021%20(3).6a59539b7915a5.89115604.png" class="form-page-cover-image" width="290" height="141" alt="Menifee Union School District">
+  </div>
+
+  <main class="form-all">
+    <div class="form-header-group header-large">
+      <h1 class="form-header">Staff Attendance Form</h1>
+      <div class="form-subHeader">Clock in and clock out by submitting this form at the start and end of your workday.</div>
+    </div>
+
+    <form class="jotform-form" action="https://submit.jotform.com/submit/261966694349072" method="post" name="form_261966694349072" id="261966694349072" accept-charset="utf-8" autocomplete="on">
+      <input type="hidden" name="formID" value="261966694349072">
+      <input type="hidden" id="JWTContainer" value="">
+      <input type="hidden" id="cardinalOrderNumber" value="">
+      <input type="hidden" id="jsExecutionTracker" name="jsExecutionTracker" value="build-date-1787762406595">
+      <input type="hidden" id="submitSource" name="submitSource" value="hosted-github">
+      <input type="hidden" id="submitDate" name="submitDate" value="">
+      <input type="hidden" id="buildDate" name="buildDate" value="1787762406595">
+      <input type="hidden" name="uploadServerUrl" value="https://upload.jotform.com/upload">
+      <input type="hidden" name="eventObserver" value="1">
+
+      <ul class="form-section page-section">
+        <li class="form-line jf-required" id="id_8">
+          <label class="form-label" id="label_8" for="input_8">Enter name or ID number <span class="form-required">*</span></label>
+          <input type="text" id="input_8" name="q8_enterName" class="form-textbox" autocomplete="off" required aria-labelledby="label_8">
+          <label class="form-sub-label" for="input_8">Start typing an employee ID, first name, or last name and select the correct employee.</label>
+        </li>
+
+        <li class="form-line">
+          <div class="attendance-row">
+            <div class="attendance-field">
+              <label class="form-label" for="attendance_date">Date <span class="form-required">*</span></label>
+              <input class="form-textbox" id="attendance_date" type="date" required>
+              <input type="hidden" id="month_4" name="q4_q4_datetime2[month]">
+              <input type="hidden" id="day_4" name="q4_q4_datetime2[day]">
+              <input type="hidden" id="year_4" name="q4_q4_datetime2[year]">
+            </div>
+            <div class="attendance-field">
+              <label class="form-label" for="attendance_time">Time <span class="form-required">*</span></label>
+              <input class="form-textbox" id="attendance_time" type="time" required>
+              <input type="hidden" id="input_5_timeInput" name="q5_q5_time3[timeInput]">
+              <input type="hidden" id="input_5_hourSelect" name="q5_q5_time3[hourSelect]">
+              <input type="hidden" id="input_5_minuteSelect" name="q5_q5_time3[minuteSelect]">
+              <input type="hidden" id="input_5_ampm" name="q5_q5_time3[ampm]">
+            </div>
+          </div>
+        </li>
+
+        <li class="form-line" data-type="control_widget" id="id_11">
+          <div id="cid_11" class="form-input-wide">
+            <div data-widget-name="Geolocation" data-component="widget-field" role="group" aria-label="Geolocation">
+              <iframe data-client-id="5343b614d5f416b42a000004" title="Geolocation" frameborder="0" scrolling="no" allowtransparency="true" allow="local-network-access *; geolocation; microphone; camera; autoplay; encrypted-media; fullscreen; aria-notify" class="custom-field-frame" id="customFieldFrame_11" src="" style="max-width:1px;border:none;width:100%;height:1px" data-width="1" data-height="1"></iframe>
+              <div class="widget-inputs-wrapper">
+                <input id="input_11" class="form-hidden form-widget" type="hidden" name="q11_typeA" value="">
+                <input id="widget_settings_11" class="form-hidden form-widget-settings" type="hidden" data-version="2" value="%5B%7B%22name%22%3A%22output%22%2C%22value%22%3A%22Address%20only%22%7D%2C%7B%22name%22%3A%22cprecision%22%2C%22value%22%3A%223%22%7D%2C%7B%22name%22%3A%22apiKey%22%2C%22value%22%3A%22AIzaSyDmImJpuNQGq4dLSV0g7O2PoR6FdvVh9j0%22%7D%5D">
+              </div>
+            </div>
+          </div>
+        </li>
+
+        <li class="form-line jf-required" id="id_10">
+          <span class="form-label">Sign In/Out <span class="form-required">*</span></span>
+          <span class="form-radio-item"><input type="radio" class="form-radio" id="input_10_0" name="q10_signInout" value="Sign In" required><label for="input_10_0">Sign In</label></span>
+          <span class="form-radio-item"><input type="radio" class="form-radio" id="input_10_1" name="q10_signInout" value="Sign Out" required><label for="input_10_1">Sign Out</label></span>
+        </li>
+
+        <li class="form-line" id="id_6">
+          <div class="form-buttons-wrapper"><button id="input_6" type="submit" class="form-submit-button">Submit Time</button></div>
+        </li>
+        <li style="display:none">Should be Empty: <input type="text" name="website" value=""></li>
+      </ul>
+
+      <input type="hidden" class="simple_spc" id="simple_spc" name="simple_spc" value="261966694349072-261966694349072">
+    </form>
+  </main>
+
+  <div id="sr-status-message" class="sr-only" role="status" aria-live="polite"></div>
+
+  <script>
+    (function(){
+      var dateEl=document.getElementById('attendance_date');
+      var timeEl=document.getElementById('attendance_time');
+      var form=document.getElementById('261966694349072');
+
+      function pad(n){return String(n).padStart(2,'0');}
+      function setNow(){
+        var d=new Date();
+        dateEl.value=d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+        timeEl.value=pad(d.getHours())+':'+pad(d.getMinutes());
+        syncFields();
+      }
+      function syncFields(){
+        if(dateEl.value){
+          var dp=dateEl.value.split('-');
+          document.getElementById('year_4').value=dp[0]||'';
+          document.getElementById('month_4').value=dp[1]||'';
+          document.getElementById('day_4').value=dp[2]||'';
+        }
+        if(timeEl.value){
+          var tp=timeEl.value.split(':');
+          var h24=parseInt(tp[0],10), min=tp[1]||'00';
+          var ampm=h24>=12?'PM':'AM';
+          var h12=h24%12||12;
+          document.getElementById('input_5_timeInput').value=pad(h12)+':'+min;
+          document.getElementById('input_5_hourSelect').value=pad(h12);
+          document.getElementById('input_5_minuteSelect').value=min;
+          document.getElementById('input_5_ampm').value=ampm;
+        }
+      }
+      dateEl.addEventListener('change',syncFields);
+      timeEl.addEventListener('change',syncFields);
+      form.addEventListener('submit',function(){syncFields();document.getElementById('submitDate').value=new Date().toISOString();});
+      setNow();
+    })();
+  </script>
+
+  <script>
+    document.addEventListener('JotformReady',function(){
+      setTimeout(function(){
+        var frame=document.getElementById('customFieldFrame_11');
+        if(!frame)return;
+        frame.onload=function(){
+          if(typeof widgetFrameLoaded!=='undefined')widgetFrameLoaded(11,{formID:261966694349072},undefined,{});
+        };
+        var next='//data-widgets.jotform.io/geolocation/?qid=11&isOpenedInPortal=undefined&isOpenedInAgent=undefined&align=Left&ref='+encodeURIComponent(window.location.protocol+'//'+window.location.host)+'&lang=en-US&injectCSS='+encodeURIComponent(window.location.search.indexOf('ndt=1')>-1);
+        frame.src=next;
+        frame.setAttribute('data-widget-src',next);
+        frame.classList.add('custom-field-frame-rendered');
+      },0);
+    });
+  </script>
+
+  <script src="./contracted-support-selector.js?v=2"></script>
+</body>
+</html>
