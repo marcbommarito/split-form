@@ -2,6 +2,15 @@
 
 <script>
 (function () {
+  var version = '2026-09-18-2';
+  var s = document.createElement('script');
+  s.src = 'js/dynamic-dropdown-fallback.js?v=' + encodeURIComponent(version);
+  document.head.appendChild(s);
+})();
+</script>
+
+<script>
+(function () {
   var version = '2026-09-18-1';
   var s = document.createElement('script');
   s.src = 'js/employee-validator.js?v=' + encodeURIComponent(version);
