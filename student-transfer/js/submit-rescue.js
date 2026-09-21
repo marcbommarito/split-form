@@ -61,7 +61,18 @@
 
   function value(id) {
     var el = byId(id);
-    return el ? String(el.value || '').trim() : '';
+    if (!el) return '';
+
+    // Dynamic-dropdown fallbacks preserve the user's real selection here.
+    // A legacy Jotform calculation can overwrite input_76 with optional
+    // field 85, so prefer/restore the fallback selection when available.
+    var saved = el.getAttribute && el.getAttribute('data-custom-fallback-value');
+    if (saved) {
+      if (el.value !== saved) el.value = saved;
+      return String(saved).trim();
+    }
+
+    return String(el.value || '').trim();
   }
 
   function checked(name) {
@@ -182,6 +193,14 @@
   }
 
   function prepareHiddenSubmitFields() {
+    // Restore the exact visible dropdown selections immediately before POST.
+    [76, 85, 87].forEach(function (id) {
+      var el = byId('input_' + id);
+      if (!el) return;
+      var saved = el.getAttribute('data-custom-fallback-value');
+      if (saved) el.value = saved;
+    });
+
     var submitDate = byId('submitDate');
     if (submitDate) submitDate.value = new Date().toISOString();
 
