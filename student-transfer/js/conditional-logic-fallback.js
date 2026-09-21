@@ -87,7 +87,18 @@
 
   function hiddenValue(id) {
     var input = byId('input_' + id);
-    return input ? String(input.value || '') : '';
+    if (!input) return '';
+
+    // The native dropdown fallback stores the user's actual selection here.
+    // Prefer it because a legacy Jotform calculation can overwrite input_76
+    // with optional field 85 after field 76 changes.
+    var saved = input.getAttribute && input.getAttribute('data-custom-fallback-value');
+    if (saved) {
+      if (input.value !== saved) input.value = saved;
+      return String(saved);
+    }
+
+    return String(input.value || '');
   }
 
   function setInputValue(input, value) {
