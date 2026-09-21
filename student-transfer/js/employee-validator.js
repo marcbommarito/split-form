@@ -135,6 +135,13 @@
     return false;
   }
 
+  // Expose the same validation to the standalone form's submit rescue.
+  // This keeps employee-number/name matching enforced even when the final
+  // submission bypasses Jotform's broken client-side submit event chain.
+  window.validateStudentTransferEmployee = function () {
+    return validate(true);
+  };
+
   function loadEmployeeData(callback) {
     dataLoaded = false;
     employeeMap = {};
