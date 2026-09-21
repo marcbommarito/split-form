@@ -22,6 +22,22 @@
     if (el) el.remove();
   }
 
+  function setStatus(message) {
+    var host = byId('cid_41');
+    if (!host) return;
+    var el = byId('student-transfer-submit-status');
+    if (!el) {
+      el = document.createElement('div');
+      el.id = 'student-transfer-submit-status';
+      el.setAttribute('role', 'status');
+      el.setAttribute('aria-live', 'polite');
+      el.style.marginTop = '8px';
+      el.style.fontSize = '0.95em';
+      host.appendChild(el);
+    }
+    el.textContent = message || '';
+  }
+
   function showError(container, id, message) {
     clearError(id);
     var host = container || getForm();
@@ -59,8 +75,11 @@
   }
 
   function hasReason(v) {
-    return !!document.querySelector('input[name="q79_reasonFor79[]"][value="' +
-      CSS.escape(v) + '"]:checked');
+    var checkedInputs = document.querySelectorAll('input[name="q79_reasonFor79[]"]:checked');
+    for (var i = 0; i < checkedInputs.length; i++) {
+      if (checkedInputs[i].value === v) return true;
+    }
+    return false;
   }
 
   function requireValue(id, label, errors) {
@@ -185,22 +204,34 @@
   function attemptSubmit() {
     if (submitting) return;
 
-    if (!validateRequiredFields()) return;
-    if (!employeeIsValid()) return;
-
-    var f = getForm();
-    if (!f) return;
-
-    prepareHiddenSubmitFields();
-    submitting = true;
-
-    var button = byId(SUBMIT_ID);
-    if (button) {
-      button.disabled = true;
-      button.textContent = 'Submitting...';
-    }
-
     try {
+      setStatus('Checking form...');
+
+      if (!validateRequiredFields()) {
+        setStatus('Submission stopped because a required field is missing.');
+        return;
+      }
+
+      if (!employeeIsValid()) {
+        setStatus('Submission stopped by employee validation.');
+        return;
+      }
+
+      var f = getForm();
+      if (!f) {
+        throw new Error('Form element was not found.');
+      }
+
+      prepareHiddenSubmitFields();
+      submitting = true;
+
+      var button = byId(SUBMIT_ID);
+      if (button) {
+        button.disabled = true;
+        button.textContent = 'Submitting...';
+      }
+      setStatus('Submitting to Jotform...');
+
       // We already validated the actual user-facing required fields above.
       // Disable browser/Jotform client validation for the final transport so
       // stale hidden controls cannot silently block the POST.
@@ -209,15 +240,18 @@
       HTMLFormElement.prototype.submit.call(f);
     } catch (e) {
       submitting = false;
+      var button = byId(SUBMIT_ID);
       if (button) {
         button.disabled = false;
         button.textContent = 'Submit';
       }
+      var detail = e && e.message ? e.message : String(e);
       showError(
         byId('cid_41'),
         'student-transfer-submit-error',
-        'The form could not be submitted. Please try again.'
+        'Submission script error: ' + detail
       );
+      setStatus('Submission did not start.');
       try { console.error('Student Transfer submit rescue failed:', e); } catch (ignore) {}
     }
   }
