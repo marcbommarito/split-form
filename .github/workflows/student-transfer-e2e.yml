@@ -1,0 +1,64 @@
+name: Student Transfer E2E Submit Test
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - '.github/workflows/student-transfer-e2e.yml'
+
+permissions:
+  contents: read
+
+jobs:
+  e2e:
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Wait for GitHub Pages deployment
+        shell: bash
+        run: |
+          set -euo pipefail
+          url="https://marcbommarito.github.io/split-form/student-transfer/"
+          for i in $(seq 1 30); do
+            if curl -fsSL "$url" | grep -q "submit-rescue.js?v=2026-09-21-1"; then
+              echo "Latest page is deployed."
+              exit 0
+            fi
+            echo "Waiting for latest GitHub Pages deployment ($i/30)..."
+            sleep 10
+          done
+          echo "Latest page was not visible after waiting."
+          exit 1
+
+      - name: Install browser test dependency
+        run: npm install --no-save puppeteer-core@24.16.0
+
+      - name: Locate Chrome
+        shell: bash
+        run: |
+          set -euo pipefail
+          chrome="$(command -v google-chrome || command -v chromium || command -v chromium-browser)"
+          echo "CHROME_PATH=$chrome" >> "$GITHUB_ENV"
+          echo "Using $chrome"
+
+      - name: Fill and submit live Student Transfer form
+        run: node .github/scripts/student-transfer-e2e.mjs
+
+      - name: Upload E2E evidence
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: student-transfer-e2e
+          path: |
+            e2e-result.json
+            before-submit.png
+            after-submit.png
+            failure.png
+          if-no-files-found: ignore
