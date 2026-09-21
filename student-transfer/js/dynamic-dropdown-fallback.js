@@ -81,6 +81,14 @@
     var container = document.getElementById('cid_' + id);
     if (!hidden || !settings || !container) return false;
 
+    // The original Jotform iframe widget marks fields 76/87 as widget-required.
+    // Once we replace that iframe with native selects, leaving this class in
+    // place causes Jotform's widget validator to reject submission even though
+    // the visible replacement controls are complete.
+    hidden.classList.remove('widget-required');
+    hidden.removeAttribute('required');
+    hidden.removeAttribute('aria-required');
+
     var listText = decodeSettings(settings);
     var counties = parseHierarchy(listText);
     if (!counties.length) return false;
