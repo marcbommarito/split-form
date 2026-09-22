@@ -35,7 +35,7 @@
     const lines = Array.from(document.querySelectorAll('.form-line'));
 
     return lines
-      .filter(line => /^P[1-6] Employee Name [1-5]$/i.test(getLabelText_(line)))
+      .filter(line => /^P[1-6] Employee Name [1-7]$/i.test(getLabelText_(line)))
       .map(getPrimaryInput_)
       .filter(Boolean);
   }
