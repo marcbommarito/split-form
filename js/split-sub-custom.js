@@ -48,7 +48,7 @@
 
     function buildPeriodGroup(periodNumber) {
       const fields = [];
-      for (let slot = 1; slot <= 5; slot += 1) {
+      for (let slot = 1; slot <= 7; slot += 1) {
         const field = findInput(`P${periodNumber} Employee Name ${slot}`);
         if (field) fields.push(field);
       }
